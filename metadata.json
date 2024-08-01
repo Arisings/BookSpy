@@ -2,6 +2,6 @@
   "name": "BookSpy",
   "creator": "Arisings",
   "description": "Steal the contents of books and quills/written books held by other players.",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "entry": "index.js"
 }
