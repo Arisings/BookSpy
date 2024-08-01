@@ -4,33 +4,60 @@ import { @Vigilant @SliderProperty @SwitchProperty @NumberProperty @TextProperty
 @Vigilant("BookSpy", "BookSpy")
 class Settings {
     @SwitchProperty({
-        name: 'Book Spy',
-        description: 'Log all books held by players.',
+        name: 'Book Logging',
+        description: 'Automatically log books held by other players in chat.',
+        subcategory: 'Book Logger',
         category: 'Config'
     })
-    bookSpy = true;
+    bookLogging = true;
+
+    @SwitchProperty({
+        name: 'Record Empty Books',
+        description: 'Whether or not pageless books should be logged.',
+        subcategory: 'Book Logger',
+        category: 'Config'
+    })
+    recordEmpty = false;
+
+    @SwitchProperty({
+        name: 'Record Repeats',
+        description: 'Whether or not books that have been encountered before should be logged.\nMake sure §bSave Logged Books §7is §aenabled§7 for the best result.',
+        subcategory: 'Book Logger',
+        category: 'Config'
+    })
+    recordRepeats = false;
 
     @SwitchProperty({
         name: 'Record Self',
-        description: 'Record books held by yourself.',
+        description: 'Whether or not books held by yourself should be logged.',
+        subcategory: 'Book Logger',
         category: 'Config'
     })
     recordSelf = false;
 
     @SwitchProperty({
-        name: 'Author Filter',
-        description: 'Only record held books that are written by the holder.',
+        name: 'Record Authors Only',
+        description: 'Whether or not only books which are held by the original author should be logged.',
+        subcategory: 'Book Logger',
         category: 'Config'
     })
-    authorFilter = false;
+    recordAuthor = false;
 
     @SwitchProperty({
-        name: 'Book Repository (Coming Soon)',
-        description: 'Store all encountered books in a file.',
+        name: 'Save Logged Books',
+        description: 'Save all logged books to a JSON file.\nWarning: If the save file gets too big it may cause a lot of lag when processing held books.',
+        subcategory: 'Book Logger',
         category: 'Config'
     })
-    bookRepo = false;
+    saveBooks = true;
 
+    @SwitchProperty({
+        name: 'Logged Books Creative Tab',
+        description: 'Save all logged books to a Creative Tab, accessible in the creative inventory. (Have Save Logged Books enabled for best result)',
+        subcategory: 'Book Logger',
+        category: 'Config'
+    })
+    logTab = true;
 
     constructor() {
         this.initialize(this);
