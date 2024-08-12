@@ -77,9 +77,9 @@ function getItemFromNBT(nbtStr) {
 
 let lastHeldItem = {}; register('worldload', () => { lastHeldItem = {}; if (Settings.logTab) updateTab() })
 let bookRepo = loadSaved(); register('gameUnload', () => { if (Settings.saveBooks) uploadSaved(bookRepo) })
-register('tick', () => {
+register('tick', (pt) => {
     if (!Settings.bookLogging) return;
-
+    if (pt % Settings.ticks != 0) return;
     World.getAllPlayers().forEach(p => {
         if (!Settings.recordSelf && p.getName() === Player.getName()) return;
 
@@ -141,9 +141,9 @@ register('command', () => {
 }).setName('bookspy').setAliases(['bs'])
 
 register('command', () => {
-    ChatLib.chat(JSON.stringify(Object.keys(bookRepo)))
     ChatLib.chat(`${prefix} §aCleared §2${Object.keys(bookRepo).length} §asaved entries.`)
     bookRepo = {};
+    updateTab()
     uploadSaved(bookRepo)
 }).setName('bookspyclearsaved').setAliases(['bsclearsaved'])
 
@@ -156,3 +156,4 @@ register('command', (player) => {
 
     bookAlertMessage(p, item)
 }).setName('stealbook').setAliases(['sb'])
+
