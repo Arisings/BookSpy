@@ -64,13 +64,22 @@ class Settings {
     @SwitchProperty({
         name: 'Logged Books Creative Tab',
         description: 'Save all logged books to a Creative Tab, accessible in the creative inventory. (Have Save Logged Books enabled for best result)',
-        subcategory: 'Book Logging',
+        subcategory: 'Creative Tab',
         category: 'Config'
     })
     logTab = true;
 
+    @SwitchProperty({
+        name: 'Include Book Information',
+        description: 'Add basic information about each book (date recorded, who held, etc.) to the items lores in the Logged Books Creative Tab.',
+        subcategory: 'Creative Tab',
+        category: 'Config'
+    })
+    bookInfo = true;
+
     constructor() {
         this.initialize(this);
+        this.addDependency('Include Book Information', 'Logged Books Creative Tab')
     }
 }
 
